@@ -1,0 +1,10 @@
+<single-spa-router>
+  <main>
+    <route path="login">
+      <application name="@mfe/react-auth"></application>
+    </route>
+    <route default>
+      <redirect to="/login"></redirect>
+    </route>
+  </main>
+</single-spa-router>
