@@ -7,12 +7,26 @@ module.exports = (webpackConfigEnv, argv) => {
     projectName: "react-auth",
     webpackConfigEnv,
     argv,
-    outputSystemJS: true,
   });
 
   defaultConfig.externals = ["single-spa"];
 
+  // 👇 THE FIX: Webpack ko raw ES Modules (export) banane se rokna 👇
+  delete defaultConfig.output.module;
+
+  if (defaultConfig.experiments) {
+    defaultConfig.experiments.outputModule = false;
+  }
+
+  // Webpack ko strictly SystemJS format use karne ko bolna
+  defaultConfig.output.libraryTarget = "system";
+
   return merge(defaultConfig, {
-    // modify the webpack config however you'd like to by adding to this object
+    // Agar humne pichli baar environment add kiya tha, toh use bhi safe side rakh lete hain
+    output: {
+      environment: {
+        module: false,
+      },
+    },
   });
 };
