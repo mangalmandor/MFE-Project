@@ -12,6 +12,12 @@ registerApplication({
   activeWhen: ["/login"], // Jab URL mein /login hoga, tabhi app load hogi
 });
 
+registerApplication({
+  name: "@mfe/angular-dashboard",
+  app: () => System.import("@mfe/angular-dashboard"),
+  activeWhen: ["/dashboard"], // Jab URL /dashboard ho
+});
+
 // 3. Engine ko start karein
 start({
   urlRerouteOnly: true,

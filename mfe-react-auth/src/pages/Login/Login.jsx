@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../services/api';
 import AuthLayout from '../../components/AuthLayout';
 import CustomInput from '../../components/CustomInput';
+import { navigateToUrl } from 'single-spa';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -10,6 +11,8 @@ const Login = () => {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     // const navigate = useNavigate(); // Navigation ke liye ready
+
+    // 1. Sabse pehle import karein single-spa ka helper
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,8 +25,16 @@ const Login = () => {
             if (data.token) {
                 localStorage.setItem('webgen_token', data.token);
                 localStorage.setItem('webgen_user', JSON.stringify(data));
-                alert(`Login Successful! Welcome to the Studio, ${data.name}.`);
-                // navigate('/dashboard'); // MFE Host ko trigger karega
+
+                // alert hatakar seedha navigate karte hain for professional feel
+                console.log("Login Success, switching to Angular Dashboard...");
+
+                // ✅ BEST WAY: Single-spa helper use karein
+                navigateToUrl('/dashboard');
+
+                // 💡 Alternative (Agar import nahi karna): 
+                // window.history.pushState(null, null, '/dashboard');
+
             } else {
                 setError(data.message || 'Invalid credentials');
             }
