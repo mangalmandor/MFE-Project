@@ -18,6 +18,12 @@ registerApplication({
   activeWhen: ["/dashboard"], // Jab URL /dashboard ho
 });
 
+registerApplication({
+  name: "@mfe/cart",
+  app: () => System.import("@mfe/cart"),
+  activeWhen: ["/cart"], // 👈 Yeh line zaroori hai!
+});
+
 // 3. Engine ko start karein
 start({
   urlRerouteOnly: true,
