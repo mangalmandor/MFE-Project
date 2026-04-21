@@ -3,7 +3,6 @@ import { AppComponent } from './app/app.component';
 import { appConfig } from './app/app.config';
 import { singleSpaAngular, provideSingleSpaPlatform } from 'single-spa-angular';
 
-// 👇 YEH 2 NAYE IMPORTS ADD KIYE HAIN 👇
 import { NgZone } from '@angular/core'; 
 import { Router, NavigationStart } from '@angular/router';
 
@@ -12,13 +11,12 @@ const lifecycles = singleSpaAngular({
     return bootstrapApplication(AppComponent, {
       providers: [
         ...provideSingleSpaPlatform(),
-        ...(appConfig.providers || []) // 👈 TypeScript ko shaant karne ke liye safe spread
+        ...(appConfig.providers || [])
       ]
     });
   },
   template: '<app-root></app-root>', 
-  
-  // 👇 YEH 3 CHEEZEIN SINGLE-SPA KO CHAHIYE HOTI HAIN 👇
+
   Router,
   NavigationStart,
   NgZone,

@@ -24,17 +24,13 @@
 
   <script>
     window.onload = () => {
-      // Step A: Pehle Single-spa library ko bulao
       System.import('single-spa').then(singleSpa => {
-        
-        // Step B: Angular app ko register karo
         singleSpa.registerApplication({
           name: 'mfe-angular-dashboard',
           app: () => System.import('mfe-angular-dashboard'),
-          activeWhen: () => true // Iska matlab 'hamesha ON rakho'
+          activeWhen: () => true
         });
         
-        // Step C: POWER BUTTON DABAAO! 
         singleSpa.start();
         
         console.log("Angular Standalone Dashboard Mounted! 🚀");
