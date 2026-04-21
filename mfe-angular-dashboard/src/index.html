@@ -2,12 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>MfeAngularDashboard</title>
+  <title>WebGen Dashboard - Standalone</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
+
+  <script type="systemjs-importmap">
+    {
+      "imports": {
+        "mfe-angular-dashboard": "/main.js",
+        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js"
+      }
+    }
+  </script>
 </head>
 <body>
+  
   <app-root></app-root>
+
+  <script>
+    window.onload = () => {
+      // Step A: Pehle Single-spa library ko bulao
+      System.import('single-spa').then(singleSpa => {
+        
+        // Step B: Angular app ko register karo
+        singleSpa.registerApplication({
+          name: 'mfe-angular-dashboard',
+          app: () => System.import('mfe-angular-dashboard'),
+          activeWhen: () => true // Iska matlab 'hamesha ON rakho'
+        });
+        
+        // Step C: POWER BUTTON DABAAO! 
+        singleSpa.start();
+        
+        console.log("Angular Standalone Dashboard Mounted! 🚀");
+      }).catch(err => {
+        console.error("Error loading Single-Spa or Angular:", err);
+      });
+    };
+  </script>
+  
 </body>
 </html>

@@ -1,5 +1,5 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { App } from './app/app';
+import { AppComponent } from './app/app.component';
 import { appConfig } from './app/app.config';
 import { singleSpaAngular, provideSingleSpaPlatform } from 'single-spa-angular';
 
@@ -9,7 +9,7 @@ import { Router, NavigationStart } from '@angular/router';
 
 const lifecycles = singleSpaAngular({
   bootstrapFunction: singleSpaProps => {
-    return bootstrapApplication(App, {
+    return bootstrapApplication(AppComponent, {
       providers: [
         ...provideSingleSpaPlatform(),
         ...(appConfig.providers || []) // 👈 TypeScript ko shaant karne ke liye safe spread
