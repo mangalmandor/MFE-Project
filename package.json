@@ -1,0 +1,30 @@
+{
+  "name": "mfe-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:backend": "cd auth-backend && npm start",
+    "start:host": "cd mfe-host && npm start",
+    "start:vue": "cd mfe-vue-payment && npm run serve",
+    "start:angular": "cd mfe-angular-dashboard && npm start",
+    "start:react": "cd mfe-react-auth && npm start",
+    "start:svelte": "cd mfe-svelte-cart && npm start",
+    "start:all": "concurrently -k -n \"BACKEND,HOST,VUE,ANGULAR,REACT,SVELTE\" -c \"bgCyan.black,bgYellow.black,bgGreen.black,bgRed.black,bgBlue.black,bgMagenta.black\" \"npm run start:backend\" \"npm run start:host\" \"npm run start:vue\" \"npm run start:angular\" \"npm run start:react\" \"npm run start:svelte\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mangalmandor/mfe-frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mangalmandor/mfe-frontend/issues"
+  },
+  "homepage": "https://github.com/mangalmandor/mfe-frontend#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
