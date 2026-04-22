@@ -1,0 +1,29 @@
+# ==========================================
+# MFE GLOBAL GITIGNORE (Sigma Protection)
+# ==========================================
+
+# 1. Global Dependencies (The '**/' is magic)
+# Yeh command project ke kisi bhi kone mein node_modules ko block kar degi
+**/node_modules/
+**/npm-debug.log
+**/yarn-error.log
+
+# 2. Global Build & Output Folders
+**/dist/
+**/build/
+**/.cache/
+
+# 3. Environment Variables (Security)
+**/.env
+**/.env.local
+**/.env.*.local
+
+# 4. OS & Editor Junk
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 5. Project Specific Root Files (Agar root level par koi build tools hain)
+package-lock.json 
+# (Note: Agar aap chahte hain ki versions exact lock rahein team ke liye, toh package-lock.json ko ignore MAT kijiye. Par agar akele dev kar rahe hain aur conflicts aa rahe hain, toh ignore kar sakte hain. Standard practice hai isko ignore NAHI karna.)
