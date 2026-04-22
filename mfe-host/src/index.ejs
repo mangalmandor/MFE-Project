@@ -1,26 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><title>MFE Host</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>WebGen Studio | MFE Host</title>
+  <script>
+  // Manual check to see if the file can be executed as a module
+  fetch('http://localhost:4202/js/app.js')
+    .then(res => res.text())
+    .then(code => {
+      console.log("✅ Payment JS file fetched successfully.");
+      if (!code.includes('System.register')) {
+        console.error("❌ ERROR: The file is NOT in SystemJS format. Check your libraryTarget.");
+      }
+    })
+    .catch(err => console.error("❌ ERROR: Network/CORS blocked the file.", err));
+</script>
+<script>
+  window.__VUE_HMR_RUNTIME__ = {
+    createRecord: () => {},
+    rerender: () => {},
+    reload: () => {}
+  };
+</script>
+
   <script type="systemjs-importmap">
     {
       "imports": {
         "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
+        "vue": "https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.runtime.global.prod.js",
         "@mfe/root-config": "http://localhost:9000/mfe-root-config.js",
         "@mfe/react-auth": "http://localhost:8080/mfe-react-auth.js",
-        "@mfe/angular-dashboard": "//localhost:4200/main.js",
-        "@mfe/cart": "http://localhost:4201/mfe-cart.js"
+        "@mfe/angular-dashboard": "http://localhost:4200/main.js",
+        "@mfe/cart": "http://localhost:4201/mfe-cart.js",
+        "@mfe/payment": "//localhost:4202/js/app.js"
       }
     }
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
+  <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.runtime.global.prod.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/zone.js@0.11.4/dist/zone.min.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/named-exports.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/use-default.min.js"></script>
+
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body { background-color: #000; margin: 0; padding: 0; }
+    /* Prevent FOUC (Flash of Unstyled Content) */
+    .hidden { display: none; }
+  </style>
 </head>
 <body>
-  <app-root></app-root>
-  <main></main>
-  <script>System.import('@mfe/root-config');</script>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+
+  <main id="single-spa-application:@mfe/root-config"></main>
+  
+  <div id="single-spa-application:@mfe/payment"></div>
+
+  <script>
+    System.import('@mfe/root-config');
+  </script>
 </body>
 </html>
