@@ -24,6 +24,16 @@ registerApplication({
   activeWhen: ["/cart"], // 👈 Yeh line zaroori hai!
 });
 
+// mfe-root-config.js
+registerApplication({
+  name: "@mfe/payment",
+  // Hum explicitly url de rahe hain agar System.import fail ho raha ho
+  app: () => System.import('http://localhost:4202/js/app.js'),
+  activeWhen: ["/payment"],
+});
+
+
+
 // 3. Engine ko start karein
 start({
   urlRerouteOnly: true,
