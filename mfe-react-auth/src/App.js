@@ -6,7 +6,7 @@ import Signup from './pages/Signup/Signup';
 
 export default function App() {
     return (
-        <BrowserRouter basename="/login">
+        <BrowserRouter basename="/home">
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
