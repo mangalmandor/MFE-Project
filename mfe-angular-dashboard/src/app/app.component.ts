@@ -69,6 +69,6 @@ isInCart(productId: number): boolean {
     alert('Are you sure to logout the session.');
   localStorage.removeItem('webgen_token');
   localStorage.removeItem('webgen_user');
-  navigateToUrl('/login'); 
+  navigateToUrl('/home'); 
 }
 }   
